@@ -770,17 +770,18 @@ extraTemplateManifests: []
 #    stringData:
 #      image_name: {{ .Values.image.repository }}
 
-# Bitnami Valkey configuration
-# https://artifacthub.io/packages/helm/bitnami/valkey
+# Official Valkey Helm Chart configuration
+# https://github.com/valkey-io/valkey-helm
 valkey:
   enabled: false
-  #architecture: standalone
+  # replicaCount: 1
   #
-  #primary:
-  #  persistence:
-  #    enabled: false
-  #    existingClaim: ""
-  #    size: 2Gi
+  # auth:
+  #   enabled: false
+  #
+  # dataStorage:
+  #   enabled: false
+  #   requestedSize: 2Gi
 ```
 ## Migration Guide to Version 1.0.0
 
