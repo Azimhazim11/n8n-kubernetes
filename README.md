@@ -98,12 +98,7 @@ main:
 
 # Values File
 
-## N8N Specific Config Section
-
-Every possible n8n config value can be set,
-even if it is not mentioned in the excerpt below.
-Treat the n8n provided configuration documentation as the source of truth,
-this Charts just forwards everything down to the n8n pods.
+## Global Section
 
 ```yaml
 
@@ -134,14 +129,24 @@ ingress:
   className: ""
   hosts:
     - host: workflow.example.com
-      paths: []
-      #  - path: /
-      #    pathType: Prefix
+      paths:
+        - path: /
+          pathType: Prefix
   tls:
     - hosts:
         - workflow.example.com
       secretName: host-domain-cert
+# ... next n8n specific section 
+```
+## N8N Specific Config Section in Values File
 
+Every possible n8n config value can be set,
+even if it is not mentioned in the excerpt below.
+Treat the n8n provided configuration documentation as the source of truth,
+this Charts just forwards everything down to the n8n pods.
+
+```yaml
+# ... after global section
 # the main (n8n) application related configuration + Kubernetes specific settings
 # The config: {} dictionary is converted to environmental variables in the ConfigMap.
 main:
@@ -172,8 +177,15 @@ main:
   #        secretKeyRef:
   #          name: db-app
   #          key: dbname
-  #
-  # N8n Kubernetes specific settings
+  # ... next k8s specific values section
+  ```
+## Kubernetes Specific Values Section
+
+this section of the `yaml` file contains the typical Kubernetes specific setting 
+related to the application deployment and operation but not the application itself.
+
+```yaml
+  # ... after n8n specific section
   #
   persistence:
     # If true, use a Persistent Volume Claim, If false, use emptyDir
